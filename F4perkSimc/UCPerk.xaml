@@ -1,0 +1,69 @@
+﻿<UserControl x:Class="F4perkSimc.UCPerk"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:F4perkSimc"
+             mc:Ignorable="d"
+             DataContextChanged="OnDataContextChanged"
+             PreviewMouseLeftButtonUp="OnLeftMBUp"
+             PreviewMouseRightButtonUp="OnRightMBUp"
+             >
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="b_lock">#BF000000</SolidColorBrush>
+        <SolidColorBrush x:Key="b_sublock">#BF0000FF</SolidColorBrush>
+        <SolidColorBrush x:Key="b_unlock">#00000000</SolidColorBrush>
+        <SolidColorBrush x:Key="b_have">#BF00FF00</SolidColorBrush>
+    </UserControl.Resources>
+    <Grid x:Name="grid_main">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!--Name-->
+        <Grid Grid.Column="0">
+            <Label Content="{Binding Path=Name}"
+                   HorizontalContentAlignment="Center"
+                   VerticalContentAlignment="Center"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   ToolTip="{Binding Path=Tips}"
+                   />
+        </Grid>
+
+        <!--Level-->
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" x:Name="grid_have">
+                <Label Content="{Binding Path=SubLevel}"
+                       HorizontalContentAlignment="Center"
+                       VerticalContentAlignment="Center"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Padding="0" />
+            </Grid>
+            <Grid Grid.Row="1"
+                  x:Name="grid_sub">
+                <Label Content="{Binding Path=SubPerk.Count}"
+                       Padding="0"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       HorizontalContentAlignment="Center"
+                       VerticalContentAlignment="Center" />
+            </Grid>
+            <Grid Grid.Row="2"  x:Name="grid_nextlvl">
+                <Label x:Name="label_nextlvl"
+                       Padding="0"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       HorizontalContentAlignment="Center"
+                       VerticalContentAlignment="Center" />
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

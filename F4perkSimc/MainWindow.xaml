@@ -1,0 +1,205 @@
+﻿<Window x:Class="F4perkSimc.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:F4perkSimc"
+        mc:Ignorable="d"
+        Title="Fallout 4 Talent"
+        Height="600"
+        Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="5*" />
+            <RowDefinition Height="5*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="4*" />
+        </Grid.ColumnDefinitions>
+        
+        <!--Role-->
+        <Grid Grid.Row="0"
+              Grid.Column="0">
+            <StackPanel>
+                <Label>Level</Label>
+                <Label Content="{Binding Source={StaticResource role},Path=Level}" />
+            </StackPanel>
+        </Grid>
+
+        <!--SPECIAL-->
+        <Grid Grid.Row="1"
+              Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <DockPanel>
+                <Label DockPanel.Dock="Left">属性</Label>
+                <Label DockPanel.Dock="Right"
+                       x:Name="initPointLabel"
+                       Content="{Binding Source={StaticResource role},Path=OriginPoint}" />
+                <GridSplitter />
+            </DockPanel>
+            <local:UCState Grid.Row="1"
+                           x:Name="us_s" />
+            <local:UCState Grid.Row="2"
+                           x:Name="us_p" />
+            <local:UCState Grid.Row="3"
+                           x:Name="us_e" />
+            <local:UCState Grid.Row="4"
+                           x:Name="us_c" />
+            <local:UCState Grid.Row="5"
+                           x:Name="us_i" />
+            <local:UCState Grid.Row="6"
+                           x:Name="us_a" />
+            <local:UCState Grid.Row="7"
+                           x:Name="us_l" />
+        </Grid>
+
+        <!--Func-->
+        <Grid Grid.Column="0"
+              Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Button Grid.Column="0"                    
+                    Click="ResetBt_Click">Reset</Button>
+            <Button Grid.Column="1" Click="RecordClick">Record</Button>
+            <Button Grid.Row="1">Clear Perk</Button>
+        </Grid>
+        
+        <!--PERK-->
+        <Grid Grid.Row="0"
+              Grid.RowSpan="4"
+              Grid.Column="1"
+              Background="AliceBlue"
+              x:Name="grid_perk">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.Resources>
+                <Style TargetType="TextBlock"
+                       x:Key="perk_header">
+                    <Setter Property="HorizontalAlignment"
+                            Value="Center" />
+                    <Setter Property="VerticalAlignment"
+                            Value="Center" />
+                    <EventSetter Event="PreviewMouseLeftButtonUp"
+                                 Handler="PerkHeader_PreviewLMBUp" />
+                    <EventSetter Event="PreviewMouseRightButtonUp"
+                                 Handler="PerkHeader_PreviewRMBUp" />
+                </Style>
+            </Grid.Resources>
+
+            <!--S-->
+            <TextBlock Grid.Column="0"
+                       Grid.Row="0"
+                       ToolTip="影响负重，及所有近战伤害"
+                       x:Name="header_s"
+                       Style="{StaticResource perk_header}">力量训练</TextBlock>
+            <!--P-->
+            <TextBlock Grid.Column="1"
+                       Grid.Row="0"
+                       ToolTip="影响VATS武器准度"
+                       x:Name="header_p"
+                       Style="{StaticResource perk_header}">感知训练</TextBlock>
+            <!--E-->
+            <TextBlock Grid.Column="2"
+                       Grid.Row="0"
+                       x:Name="header_e"
+                       ToolTip="影响生命值和冲刺时消耗的点数"
+                       Style="{StaticResource perk_header}">耐力训练</TextBlock>
+            <!--C-->
+            <TextBlock Grid.Column="3"
+                       Grid.Row="0"
+                       x:Name="header_c"
+                       ToolTip="影响对话和讲价时的说服率"
+                       Style="{StaticResource perk_header}">魅力训练</TextBlock>
+            <!--I-->
+            <TextBlock Grid.Column="4"
+                       Grid.Row="0"
+                       x:Name="header_i"
+                       ToolTip="影响获得的经验"
+                       Style="{StaticResource perk_header}">智力训练</TextBlock>
+            <!--A-->
+            <TextBlock Grid.Column="5"
+                       Grid.Row="0"
+                       x:Name="header_a"
+                       ToolTip="影响VATS中的AP和潜行能力"
+                       Style="{StaticResource perk_header}">敏捷训练</TextBlock>
+            <!--L-->
+            <TextBlock Grid.Column="6"
+                       Grid.Row="0"
+                       x:Name="header_l"
+                       ToolTip="影响暴击条填充速度"
+                       Style="{StaticResource perk_header}">幸运训练</TextBlock>
+        </Grid>
+
+        <!--ExtraPerk-->
+        <Grid Grid.Row="2"
+              Grid.Column="0">
+            <StackPanel>
+                <Label Content="额外的属性" />
+                <Button x:Name="extra_stat"
+                        Content="SPEICAL" 
+                        Click="ExtraStat_Click"
+                        ToolTip="任意选择增加一个属性点"/>
+                <Button x:Name="extra_s"
+                        Content="力量娃娃"
+                        Click="ExtraStat_Click" />
+                <Button x:Name="extra_p"
+                        Content="感知娃娃"
+                        Click="ExtraStat_Click" />
+                <Button x:Name="extra_e"
+                        Content="耐力娃娃"
+                        Click="ExtraStat_Click" />
+                <Button x:Name="extra_c"
+                        Content="魅力娃娃"
+                        Click="ExtraStat_Click" />
+                <Button x:Name="extra_i"
+                        Content="智力娃娃"
+                        Click="ExtraStat_Click" />
+                <Button x:Name="extra_a"
+                        Content="敏捷娃娃"
+                        Click="ExtraStat_Click" />
+                <Button x:Name="extra_l"
+                        Content="幸运娃娃"
+                        Click="ExtraStat_Click" />
+
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
